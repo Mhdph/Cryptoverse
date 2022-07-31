@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Row, Col, Statistic, Typography, Card, Input } from "antd";
+import { Row, Col, Card, Input } from "antd";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import Loading from "./Loaidng";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ type CryptocurrenciesProps = {
   simplified?: boolean;
 };
 
-interface Currency {
+export interface Currency {
   id: React.Key | null | undefined;
   name: string;
   rank: number;
@@ -20,18 +20,21 @@ interface Currency {
 
 const Cryptocurrencies: React.FC<CryptocurrenciesProps> = ({ simplified }) => {
   const count = simplified ? 10 : 100;
-  const { data: cryptolist, isFetching } = useGetCryptosQuery(count);
-  const [cryptos, setCryptos] = React.useState(cryptolist?.data?.coins);
-  const [serachTerm, setSearchTerm] = React.useState("");
-  if (isFetching) return <Loading />;
+  const { data: cryptoList, isFetching } = useGetCryptosQuery(count);
+  const [cryptos, setCryptos] = React.useState([]);
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   useEffect(() => {
-    const filterdedCryptos = cryptolist?.data?.coins.filter((coin: any) => {
-      return coin.name.toLowerCase().includes(serachTerm.toLowerCase());
-    });
+    setCryptos(cryptoList?.data?.coins ?? []);
 
-    setCryptos(filterdedCryptos);
-  }, [cryptolist, serachTerm]);
+    const filteredList = cryptoList?.data?.coins?.filter((item: any) =>
+      item?.name.toLowerCase().includes(searchTerm)
+    );
+
+    setCryptos(filteredList);
+  }, [cryptoList, searchTerm]);
+
+  if (isFetching) return <Loading />;
 
   return (
     <>

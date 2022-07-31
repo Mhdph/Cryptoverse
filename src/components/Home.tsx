@@ -67,7 +67,7 @@ const Home: React.FC<HomeProps> = () => {
           <Link to="/news">Show More</Link>
         </Title>
       </div>
-      <News />
+      <News simplified />
     </>
   );
 };

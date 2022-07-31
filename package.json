@@ -11,10 +11,12 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@reduxjs/toolkit": "^1.8.3",
+    "@types/lodash": "^4.14.182",
     "antd": "^4.22.2",
     "axios": "^0.27.2",
     "chart.js": "^3.8.2",
     "html-react-parser": "^3.0.1",
+    "lodash": "^4.17.21",
     "millify": "^5.0.0",
     "moment": "^2.29.4",
     "node-sass": "^7.0.1",

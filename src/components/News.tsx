@@ -7,7 +7,7 @@ import { useGetCryptosQuery } from "../services/cryptoApi";
 import { Currency } from "./Cryptocurrencies";
 
 type NewsProps = {
-  simplified: boolean;
+  simplified?: boolean;
 };
 
 interface News {
@@ -52,8 +52,8 @@ const News: React.FC<NewsProps> = ({ simplified }) => {
             loading={isCryptosFetching}
             value={newsCategory}
             onChange={(value) => setNewsCategory(value)}
-            // @ts-ignore
             filterOption={(input, option) =>
+              // @ts-ignore
               option?.children?.toLowercase().indexOf(input.toLowerCase()) >= 0
             }
           >

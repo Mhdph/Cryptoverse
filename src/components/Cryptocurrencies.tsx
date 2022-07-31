@@ -9,7 +9,7 @@ type CryptocurrenciesProps = {
 };
 
 export interface Currency {
-  id: React.Key | null | undefined;
+  uuid: any;
   name: string;
   rank: number;
   iconUrl: string;
@@ -34,6 +34,8 @@ const Cryptocurrencies: React.FC<CryptocurrenciesProps> = ({ simplified }) => {
     setCryptos(filteredList);
   }, [cryptoList, searchTerm]);
 
+  console.log(cryptoList);
+
   if (isFetching) return <Loading />;
 
   return (
@@ -49,8 +51,8 @@ const Cryptocurrencies: React.FC<CryptocurrenciesProps> = ({ simplified }) => {
 
       <Row gutter={[32, 32]} className="crypto-card-container">
         {cryptos?.map((currency: Currency) => (
-          <Col className="crypto-card" xs={24} lg={6} key={currency.id}>
-            <Link to={`/crypto/${currency.id}`}>
+          <Col className="crypto-card" xs={24} lg={6} key={currency.uuid}>
+            <Link to={`/crypto/${currency.uuid}`}>
               <Card
                 title={`${currency.rank}. ${currency.name}`}
                 extra={<img className="crypto-image" src={currency.iconUrl} />}
